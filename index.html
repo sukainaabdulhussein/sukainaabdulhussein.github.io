@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sukaina Abdul Hussein | Assistant Lecturer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #00d2ff;
+            --secondary-color: #3a7bd5;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            font-family: 'Poppins', 'Cairo', sans-serif; 
+            background: radial-gradient(circle at top right, #1a2980, #26d0ce);
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364); 
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header { 
+            width: 100%;
+            padding: 120px 20px 40px; 
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+            transition: transform 0.5s;
+        }
+
+        .profile-img:hover { transform: scale(1.05) rotate(2deg); }
+
+        h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; letter-spacing: 1px; }
+        p#job-title { color: var(--primary-color); font-weight: 600; font-size: 1.1rem; margin-bottom: 5px; }
+        p#sub-title { color: var(--text-secondary); font-size: 0.9rem; max-width: 600px; margin: 0 auto; }
+
+        /* --- Language Switcher --- */
+        .lang-switch {
+            position: absolute;
+            top: 25px;
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 8px;
+            z-index: 100;
+            justify-content: center;
+        }
+        
+        @media (max-width: 600px) {
+            .lang-switch { left: 50%; transform: translateX(-50%); width: 100%; top: 15px; } 
+        }
+        
+        @media (min-width: 601px) {
+            html[dir="rtl"] .lang-switch { left: 25px; transform: none; }
+            html[dir="ltr"] .lang-switch { right: 25px; transform: none; }
+        }
+
+        .lang-btn {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .lang-btn:hover { background: var(--primary-color); border-color: var(--primary-color); color: #000; }
+
+        /* --- Main Navigation --- */
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            padding: 0 10px;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: inherit;
+        }
+
+        .nav-btn i { color: var(--primary-color); }
+        .nav-btn:hover, .nav-btn.active-btn {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- Content Sections --- */
+        .content-section { 
+            display: none; 
+            width: 90%; 
+            max-width: 900px;
+            padding: 40px;
+            margin-bottom: 50px;
+            animation: slideUp 0.6s ease forwards;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .active-section { display: block; }
+
+        h3 { 
+            color: var(--primary-color); 
+            border-bottom: 2px solid rgba(255,255,255,0.1); 
+            padding-bottom: 15px; 
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        ul { list-style: none; }
+        li { 
+            margin-bottom: 15px; 
+            position: relative; 
+            padding-inline-start: 25px;
+        }
+        li::before {
+            content: '▹';
+            color: var(--primary-color);
+            position: absolute;
+            left: 0; 
+        }
+        html[dir="rtl"] li::before { left: auto; right: 0; }
+
+        /* --- WhatsApp Button --- */
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+        .whatsapp-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .header { padding-top: 80px; }
+            .nav-btn { width: 45%; justify-content: center; font-size: 0.9rem; }
+            .content-section { padding: 25px; width: 95%; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switch glass-card" style="padding: 8px; border-radius: 30px;">
+        <button class="lang-btn" onclick="changeLanguage('ar')">عربي</button>
+        <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="changeLanguage('fa')">فارسی</button>
+    </div>
+
+    <header class="header">
+        <div class="profile-wrapper">
+            <img src="sukaina-abdulhussein.jpg" alt="Sukaina Abdul Hussein" class="profile-img">
+        </div>
+        <h1 id="name">سكينة عبد الحسين عبد الله</h1>
+        <p id="job-title">مُدرس مساعد وباحثة دكتوراه في هندسة الحاسبات</p>
+        <p id="sub-title">الجمع بين التعليم الأكاديمي والبحث العلمي في الذكاء الاصطناعي</p>
+    </header>
+
+    <nav class="nav-container">
+        <button class="nav-btn" onclick="showSection('about')" id="btn-about"><i class="fas fa-user"></i> من أنا</button>
+        <button class="nav-btn" onclick="showSection('experience')" id="btn-exp"><i class="fas fa-briefcase"></i> الخبرة</button>
+        <button class="nav-btn" onclick="showSection('researches')" id="btn-res"><i class="fas fa-book-open"></i> الأبحاث</button>
+        <button class="nav-btn" onclick="showSection('skills')" id="btn-skill"><i class="fas fa-tools"></i> المهارات</button>
+        <button class="nav-btn" onclick="showSection('contact')" id="btn-cont"><i class="fas fa-envelope"></i> تواصل معي</button>
+    </nav>
+
+    <div id="about" class="content-section glass-card active-section">
+        <h3 id="about-title">نبذة عني</h3>
+        <p id="about-text">
+            باحثة دكتوراه في هندسة الحاسبات (قسم البرمجيات) بجامعة علم وصنعت - طهران. حاصلة على درجة الماجستير في هندسة الحاسبات، وأعمل حالياً مُدرساً مساعداً في معهد الفنون الجميلة. أمتلك شغفاً كبيراً بالتعلم والتطوير في مختلف جوانب الحياة، وأسعى دائماً للتميز في العمل الأكاديمي والبحثي.
+        </p>
+    </div>
+
+    <div id="experience" class="content-section glass-card">
+        <h3 id="exp-title">الخبرة العملية</h3>
+        <ul id="exp-list">
+            <li><strong>التدريس:</strong> معلمة في وزارة التربية العراقية منذ 2007 (معهد الفنون الجميلة، مدرسة نجمات السماء، وغيرها).</li>
+            <li><strong>الإدارة:</strong> مديرة شركة الإغاثة الدولية للقروض الصغيرة (2008-2014).</li>
+            <li><strong>العلاقات العامة:</strong> مديرة حسابات ومديرة علاقات عامة في شركة العصب الإماراتية.</li>
+        </ul>
+    </div>
+
+    <div id="researches" class="content-section glass-card">
+        <h3 id="res-title">الأبحاث العلمية</h3>
+        <ul id="res-list">
+            [cite_start]<li><strong>تشخيص أمراض الكلى:</strong> تحسين تشخيص أمراض الكلى المزمنة باستخدام التقنيات الذكية (2023). [cite: 43]</li>
+            [cite_start]<li><strong>تحليل النصوص:</strong> تحديد عناصر الخطاب في الكتابة باستخدام Longformer (2023). [cite: 44]</li>
+            [cite_start]<li><strong>تقييم AraBERT:</strong> الكشف عن اللهجات وقطبية المشاعر في اللغة العربية (2024). [cite: 45]</li>
+        </ul>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="https://scholar.google.com/citations?user=Bjd-AkgAAAAJ&hl=en" target="_blank" class="nav-btn" style="display: inline-flex; background: rgba(255,255,255,0.1);">
+                <i class="fas fa-graduation-cap"></i> <span id="scholar-link">Google Scholar</span>
+            </a>
+        </div>
+    </div>
+
+    <div id="skills" class="content-section glass-card">
+        <h3 id="skill-title">المهارات والمؤهلات</h3>
+        <div id="skill-content">
+            <p><i class="fas fa-lightbulb" style="color:#f1c40f"></i> <strong>المهارات الشخصية:</strong> التفكير الإبداعي، إدارة المشاريع، حل المشاكل، صنع القرار.</p>
+            <p><i class="fas fa-laptop" style="color:#00d2ff"></i> <strong>الحاسوب:</strong> مايكروسوفت أوفيس، برامج التصميم والرسم الحاسوبي، الفوتوشوب.</p>
+            <p><i class="fas fa-language" style="color:#2ecc71"></i> <strong>اللغات:</strong> العربية (لغة أم)، الإنجليزية (متقدم)، الفارسية (متوسط).</p>
+        </div>
+    </div>
+
+    <div id="contact" class="content-section glass-card">
+        <h3 id="cont-title">لنتواصل معاً</h3>
+        <div id="cont-content" style="text-align: center;">
+            <p id="cont-loc" style="font-size: 1.2rem; margin-bottom: 20px;">
+                <i class="fas fa-map-marker-alt" style="color:#e74c3c"></i> العراق - البصرة
+            </p>
+            <p style="margin-bottom: 30px;">
+                <i class="fas fa-envelope" style="color:#f1c40f"></i> sukainaaabdullah@gmail.com
+            </p>
+            
+            <a href="https://wa.me/9647716182885" target="_blank" class="whatsapp-btn">
+                <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                <span id="wa-text">تواصل عبر واتساب</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            ar: {
+                name: "سكينة عبد الحسين عبد الله",
+                job: "مُدرس مساعد وباحثة دكتوراه في هندسة الحاسبات",
+                sub: "الجمع بين التعليم الأكاديمي والبحث العلمي في الذكاء الاصطناعي",
+                btnAbout: '<i class="fas fa-user"></i> من أنا',
+                btnRes: '<i class="fas fa-book-open"></i> الأبحاث',
+                btnExp: '<i class="fas fa-briefcase"></i> الخبرة',
+                btnSkill: '<i class="fas fa-tools"></i> المهارات',
+                btnCont: '<i class="fas fa-envelope"></i> تواصل معي',
+                aboutTitle: "نبذة عني",
+                aboutText: "باحثة دكتوراه في هندسة الحاسبات (قسم البرمجيات) بجامعة علم وصنعت - طهران. حاصلة على درجة الماجستير في هندسة الحاسبات، وأعمل حالياً مُدرساً مساعداً في معهد الفنون الجميلة. أمتلك شغفاً كبيراً بالتعلم والتطوير في مختلف جوانب الحياة.",
+                resTitle: "الأبحاث العلمية",
+                scholarLink: "Google Scholar حسابي على",
+                expTitle: "الخبرة العملية",
+                skillTitle: "المهارات والمؤهلات",
+                contTitle: "لنتواصل معاً",
+                contLoc: '<i class="fas fa-map-marker-alt" style="color:#e74c3c"></i> العراق - البصرة',
+                waText: "تواصل عبر واتساب",
+                resList: `
+                    <li><strong>تشخيص أمراض الكلى:</strong> تحسين تشخيص أمراض الكلى المزمنة باستخدام التقنيات الذكية (2023).</li>
+                    <li><strong>تحليل النصوص:</strong> تحديد عناصر الخطاب في الكتابة باستخدام Longformer (2023).</li>
+                    <li><strong>تقييم AraBERT:</strong> الكشف عن اللهجات وقطبية المشاعر في اللغة العربية (2024).</li>`,
+                expList: `
+                    <li><strong>التدريس:</strong> معلمة في وزارة التربية العراقية منذ 2007 (معهد الفنون الجميلة، مدرسة نجمات السماء، وغيرها).</li>
+                    <li><strong>الإدارة:</strong> مديرة شركة الإغاثة الدولية للقروض الصغيرة (2008-2014).</li>
+                    <li><strong>العلاقات العامة:</strong> مديرة حسابات ومديرة علاقات عامة في شركة العصب الإماراتية.</li>`,
+                skillContent: `
+                    <p><i class="fas fa-lightbulb" style="color:#f1c40f"></i> <strong>المهارات الشخصية:</strong> التفكير الإبداعي، إدارة المشاريع، حل المشاكل.</p>
+                    <p><i class="fas fa-laptop" style="color:#00d2ff"></i> <strong>الحاسوب:</strong> برامج التصميم، الرسم الحاسوبي، الفوتوشوب.</p>
+                    <p><i class="fas fa-language" style="color:#2ecc71"></i> <strong>اللغات:</strong> العربية (لغة أم)، الإنجليزية (متقدم)، الفارسية (متوسط).</p>`
+            },
+            en: {
+                name: "Sukaina Abdul Hussein Abdullah",
+                job: "Assistant Lecturer & PhD Researcher",
+                sub: "Combining Academic Education with AI Research",
+                btnAbout: '<i class="fas fa-user"></i> About Me',
+                btnRes: '<i class="fas fa-book-open"></i> Research',
+                btnExp: '<i class="fas fa-briefcase"></i> Experience',
+                btnSkill: '<i class="fas fa-tools"></i> Skills',
+                btnCont: '<i class="fas fa-envelope"></i> Contact',
+                aboutTitle: "About Me",
+                aboutText: "PhD Researcher in Computer Engineering (Software) at Iran University of Science and Technology. I hold a Master's degree in Computer Engineering and currently work as an Assistant Lecturer at the Institute of Fine Arts. I am passionate about learning and development.",
+                resTitle: "Published Research",
+                scholarLink: "Visit Google Scholar",
+                expTitle: "Practical Experience",
+                skillTitle: "Skills & Qualifications",
+                contTitle: "Let's Connect",
+                contLoc: '<i class="fas fa-map-marker-alt" style="color:#e74c3c"></i> Iraq - Basra',
+                waText: "Chat on WhatsApp",
+                resList: `
+                    <li><strong>CKD Diagnosis:</strong> Improving Chronic Kidney Disease diagnosis using smart techniques (2023).</li>
+                    <li><strong>Discourse Analysis:</strong> Identifying Discourse Elements in Writing using Longformer (2023).</li>
+                    <li><strong>AraBERT Study:</strong> Evaluating AraBERT Model in Detecting Dialects and Sentiment Polarity (2024).</li>`,
+                expList: `
+                    <li><strong>Teaching:</strong> Teacher at Ministry of Education since 2007 (Institute of Fine Arts, Najmat Al-Sama School).</li>
+                    <li><strong>Management:</strong> Manager of International Relief Company for Microloans (2008-2014).</li>
+                    <li><strong>Public Relations:</strong> Accounts & PR Manager at Al-Asab UAE Company.</li>`,
+                skillContent: `
+                    <p><i class="fas fa-lightbulb" style="color:#f1c40f"></i> <strong>Soft Skills:</strong> Creative Thinking, Project Management, Problem Solving.</p>
+                    <p><i class="fas fa-laptop" style="color:#00d2ff"></i> <strong>Computer:</strong> Design Software, Computer Graphics, Photoshop.</p>
+                    <p><i class="fas fa-language" style="color:#2ecc71"></i> <strong>Languages:</strong> Arabic (Native), English (Advanced), Persian (Intermediate).</p>`
+            },
+            fa: {
+                name: "سکینه عبدالحسین عبدالله",
+                job: "مدرس دستیار و پژوهشگر دکتری مهندسی کامپیوتر",
+                sub: "تلفیق آموزش دانشگاهی با تحقیقات هوش مصنوعی",
+                btnAbout: '<i class="fas fa-user"></i> درباره من',
+                btnRes: '<i class="fas fa-book-open"></i> پژوهش‌ها',
+                btnExp: '<i class="fas fa-briefcase"></i> تجربیات',
+                btnSkill: '<i class="fas fa-tools"></i> مهارت‌ها',
+                btnCont: '<i class="fas fa-envelope"></i> تماس',
+                aboutTitle: "درباره من",
+                aboutText: "دانشجوی دکتری مهندسی کامپیوتر (نرم‌افزار) در دانشگاه علم و صنعت ایران. دارای مدرک کارشناسی ارشد مهندسی کامپیوتر و مدرس دستیار موسسه هنرهای زیبا. من علاقه زیادی به یادگیری و پیشرفت در جنبه‌های مختلف زندگی دارم.",
+                resTitle: "مقاله‌های منتشر شده",
+                scholarLink: "پروفایل گوگل اسکولار",
+                expTitle: "سوابق کاری",
+                skillTitle: "مهارت‌ها و شایستگی‌ها",
+                contTitle: "تماس با من",
+                contLoc: '<i class="fas fa-map-marker-alt" style="color:#e74c3c"></i> عراق - بصره',
+                waText: "چت در واتساپ",
+                resList: `
+                    <li><strong>تشخیص CKD:</strong> بهبود تشخیص بیماری مزمن کلیه با استفاده از تکنیک‌های هوشمند (2023).</li>
+                    <li><strong>تحلیل گفتمان:</strong> شناسایی عناصر گفتمان در نوشتار با استفاده از Longformer (2023).</li>
+                    <li><strong>مطالعه AraBERT:</strong> ارزیابی مدل AraBERT در تشخیص لهجه‌ها و قطبیت احساسات (2024).</li>`,
+                expList: `
+                    <li><strong>تدریس:</strong> معلم وزارت آموزش و پرورش از سال 2007 (موسسه هنرهای زیبا، مدرسه نجمات السماء).</li>
+                    <li><strong>مدیریت:</strong> مدیر شرکت امداد بین‌المللی برای وام‌های خرد (2008-2014).</li>
+                    <li><strong>روابط عمومی:</strong> مدیر حسابداری و روابط عمومی در شرکت العصب امارات.</li>`,
+                skillContent: `
+                    <p><i class="fas fa-lightbulb" style="color:#f1c40f"></i> <strong>مهارت‌های فردی:</strong> تفکر خلاق، مدیریت پروژه، حل مسئله.</p>
+                    <p><i class="fas fa-laptop" style="color:#00d2ff"></i> <strong>کامپیوتر:</strong> نرم‌افزارهای طراحی، گرافیک کامپیوتری، فتوشاپ.</p>
+                    <p><i class="fas fa-language" style="color:#2ecc71"></i> <strong>زبان‌ها:</strong> عربی (مادری)، انگلیسی (پیشرفته)، فارسی (متوسط).</p>`
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.documentElement.dir = (lang === 'ar' || lang === 'fa') ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+
+            const t = translations[lang];
+            
+            document.getElementById('name').textContent = t.name;
+            document.getElementById('job-title').textContent = t.job;
+            document.getElementById('sub-title').textContent = t.sub;
+            document.getElementById('about-title').textContent = t.aboutTitle;
+            document.getElementById('about-text').textContent = t.aboutText;
+            document.getElementById('res-title').textContent = t.resTitle;
+            document.getElementById('scholar-link').textContent = t.scholarLink;
+            document.getElementById('exp-title').textContent = t.expTitle;
+            document.getElementById('skill-title').textContent = t.skillTitle;
+            document.getElementById('cont-title').textContent = t.contTitle;
+            document.getElementById('wa-text').textContent = t.waText;
+
+            document.getElementById('btn-about').innerHTML = t.btnAbout;
+            document.getElementById('btn-res').innerHTML = t.btnRes;
+            document.getElementById('btn-exp').innerHTML = t.btnExp;
+            document.getElementById('btn-skill').innerHTML = t.btnSkill;
+            document.getElementById('btn-cont').innerHTML = t.btnCont;
+            document.getElementById('cont-loc').innerHTML = t.contLoc;
+            
+            document.getElementById('exp-list').innerHTML = t.expList;
+            document.getElementById('skill-content').innerHTML = t.skillContent;
+            document.getElementById('res-list').innerHTML = t.resList;
+        }
+
+        function showSection(id) {
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active-section'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active-btn'));
+            
+            document.getElementById(id).classList.add('active-section');
+            let btnId = 'btn-about';
+            if(id === 'experience') btnId = 'btn-exp';
+            else if(id === 'researches') btnId = 'btn-res';
+            else if(id === 'skills') btnId = 'btn-skill';
+            else if(id === 'contact') btnId = 'btn-cont';
+            
+            document.getElementById(btnId).classList.add('active-btn');
+        }
+    </script>
+</body>
+</html>
