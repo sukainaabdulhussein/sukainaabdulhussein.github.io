@@ -177,9 +177,9 @@
         }
         html[dir="rtl"] li::before { left: auto; right: 0; }
 
-        /* --- WhatsApp Button --- */
-        .whatsapp-btn {
-            background: linear-gradient(45deg, #25D366, #128C7E);
+        /* --- Email Button --- */
+        .email-btn {
+            background: linear-gradient(45deg, #f1c40f, #e67e22);
             color: white;
             padding: 15px 30px;
             border-radius: 50px;
@@ -190,9 +190,9 @@
             font-weight: bold;
             margin-top: 20px;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.4);
         }
-        .whatsapp-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
+        .email-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(241, 196, 15, 0.6); }
 
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -217,7 +217,7 @@
 
     <header class="header">
         <div class="profile-wrapper">
-            <img src="sukaina-abdulhussein.jpg" alt="Sukaina Abdul Hussein" class="profile-img">
+            <img src="sukainaa-abdulhussein.jpg" alt="Sukaina Abdul Hussein" class="profile-img">
         </div>
         <h1 id="name">سكينة عبد الحسين عبد الله</h1>
         <p id="job-title">تدريسية، مُدرس مساعد وباحثة دكتوراه في هندسة الحاسبات</p>
@@ -281,9 +281,9 @@
                 <i class="fas fa-envelope" style="color:#f1c40f"></i> sukainaaabdullah@gmail.com
             </p>
             
-            <a href="https://wa.me/9647716182885" target="_blank" class="whatsapp-btn">
-                <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
-                <span id="wa-text">تواصل عبر واتساب</span>
+            <a href="mailto:sukainaaabdullah@gmail.com" class="email-btn">
+                <i class="fas fa-paper-plane" style="font-size: 1.5rem;"></i>
+                <span id="email-text">ارسل بريد إلكتروني</span>
             </a>
         </div>
     </div>
@@ -307,7 +307,7 @@
                 skillTitle: "المهارات والمؤهلات",
                 contTitle: "لنتواصل معاً",
                 contLoc: '<i class="fas fa-map-marker-alt" style="color:#e74c3c"></i> العراق - البصرة',
-                waText: "تواصل عبر واتساب",
+                emailText: "ارسل بريد إلكتروني",
                 resList: `
                     <li><strong>تشخيص أمراض الكلى:</strong> تحسين تشخيص أمراض الكلى المزمنة باستخدام التقنيات الذكية (2023).</li>
                     <li><strong>تحليل النصوص:</strong> تحديد عناصر الخطاب في الكتابة باستخدام Longformer (2023).</li>
@@ -338,7 +338,7 @@
                 skillTitle: "Skills & Qualifications",
                 contTitle: "Let's Connect",
                 contLoc: '<i class="fas fa-map-marker-alt" style="color:#e74c3c"></i> Iraq - Basra',
-                waText: "Chat on WhatsApp",
+                emailText: "Send an Email",
                 resList: `
                     <li><strong>CKD Diagnosis:</strong> Improving Chronic Kidney Disease diagnosis using smart techniques (2023).</li>
                     <li><strong>Discourse Analysis:</strong> Identifying Discourse Elements in Writing using Longformer (2023).</li>
@@ -369,7 +369,7 @@
                 skillTitle: "مهارت‌ها و شایستگی‌ها",
                 contTitle: "تماس با من",
                 contLoc: '<i class="fas fa-map-marker-alt" style="color:#e74c3c"></i> عراق - بصره',
-                waText: "چت در واتساپ",
+                emailText: "ارسال ایمیل",
                 resList: `
                     <li><strong>تشخیص CKD:</strong> بهبود تشخیص بیماری مزمن کلیه با استفاده از تکنیک‌های هوشمند (2023).</li>
                     <li><strong>تحلیل گفتمان:</strong> شناسایی عناصر گفتمان در نوشتار با استفاده از Longformer (2023).</li>
@@ -401,7 +401,7 @@
             document.getElementById('exp-title').textContent = t.expTitle;
             document.getElementById('skill-title').textContent = t.skillTitle;
             document.getElementById('cont-title').textContent = t.contTitle;
-            document.getElementById('wa-text').textContent = t.waText;
+            document.getElementById('email-text').textContent = t.emailText;
 
             document.getElementById('btn-about').innerHTML = t.btnAbout;
             document.getElementById('btn-res').innerHTML = t.btnRes;
@@ -431,4 +431,3 @@
     </script>
 </body>
 </html>
-
